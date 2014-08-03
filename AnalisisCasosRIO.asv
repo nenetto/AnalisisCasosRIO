@@ -94,19 +94,59 @@ save_nii(TRE_puntosCT,'Resultados/TRE_puntosCT_FRE_included.hdr');
 TRE_lineasCT.img = FRE_lineas * TRE_lineasCT.img;
 save_nii(TRE_lineasCT,'Resultados/TRE_lineasCT_FRE_included.hdr');
 
+%% Calculo del TRE en los ejes principales
+
+tre_ejes_principales = Calculo_TRE_EjesPrincipales(0.1,'../Codigo/CT_mask_lineas.hdr');
+
+
+errores = tre_ejes_principales(:,1:3);
+errores = errores(:);
+
+TRE_ejes_200 = rms(errores);
+
+
 %% Copia de la imagen preoperatoria
 
-copyfile('../Codigo/CTPRE.hdr','Resultados/CTPRE.hdr');
-copyfile('../Codigo/CTPRE.img','Resultados/CTPRE.img');
+str_aux1 = [folder, '/Codigo/CTPRE.hdr'];
+str_aux2 = [folder, 'Resultados/CTPRE.hdr'];
+copyfile(str_aux1,str_aux2);
 
-save('Resultados/FRELineas.txt','fre_lineas','-ascii', '-double')
-save('Resultados/FREPuntos.txt','fre_puntos','-ascii', '-double')
+str_aux1 = [folder, '/Codigo/CTPRE.img'];
+str_aux2 = [folder, 'Resultados/CTPRE.img'];
+copyfile(str_aux1,str_aux2);
 
 
 
+%% TRE puntos con el registro de las líneas (Opción V)
+
+tre_puntosUsingM_lines = tre_puntos_UsingMt_lines(folder);
 
 
-Calculo_TRE_EjesPrincipales(0.1,'../Codigo/CT_mask_lineas.hdr');
+
+%% Guardado de resultados
+
+% Struct
+
+results = struct();
+
+results.freli
+
+
+% Separados
+str_aux = [folder, 'Resultados/FRELineas.txt'];
+save(str_aux,'fre_lineas','-ascii', '-double')
+
+str_aux = [folder, 'Resultados/FREPuntos.txt'];
+save(str_aux,'-ascii', '-double')
+
+str_aux = [folder, 'Resultados/tre_ejes_principales.txt'];
+save(str_aux,'tre_ejes_principales','-ascii', '-double')
+
+str_aux = [folder, 'Resultados/TRE_ejes.txt'];
+save(str_aux,'TRE_ejes_200','-ascii', '-double')
+
+str_aux = [folder, 'Resultados/tre_puntosUsingM_lines.txt'];
+save(str_aux,'tre_puntosUsingM_lines','-ascii', '-double')
 
 
 

@@ -1,0 +1,25 @@
+function tre_puntos_UsingMt_lines(folder)
+
+
+
+
+str
+load('PuntosOptPRE.mat');
+load('MtransformacionLINEAS.mat');
+
+
+
+
+
+% TRE 
+    Dicp2 = MtransFinal(1:3,1:3) * PuntosOpt' + repmat(MtransFinal(1:3,4), 1, length(PuntosOpt));
+    TRE_rms_7puntos_mm = sqrt(mean((sqrt(sum((Dicp2-PuntosCT').^2))).^2))*1000
+    PuntosCT'
+    ind = find(Dicp2(3,:)<0.5) %Sólo cercanos zona quirúrgica (5)
+    TRE_rms_5puntos_mm = sqrt(mean((sqrt(sum((Dicp2(:,ind)-PuntosCT(ind,:)').^2))).^2))*1000
+
+
+
+
+
+end

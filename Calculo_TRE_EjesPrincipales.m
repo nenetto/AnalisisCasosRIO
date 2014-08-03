@@ -1,4 +1,4 @@
-function Calculo_TRE_EjesPrincipales(resolucion,mascara)
+function Resultados = Calculo_TRE_EjesPrincipales(resolucion,mascara)
 
 
 % Lectura de la mascara
@@ -59,8 +59,8 @@ d = length(eje);
 Resultados = [tre_map(1:d) tre_map((d+1):2*d) tre_map((2*d+1):end) eje];
 
 
-save('Resultados/ResultadosEjesPrincipales.txt','Resultados','-ascii', '-double')
-
+% save('Resultados/ResultadosEjesPrincipales.txt','Resultados','-ascii', '-double')
+% 
 
 
 
